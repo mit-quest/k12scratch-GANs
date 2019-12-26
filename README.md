@@ -25,21 +25,21 @@ Also, you'll notice that I mention Phillip quite a bit throughout this document.
 ## How the GAN Paint Extension works 
 ### Overview
 The GAN Paint Extension is made up of 3 major components: the Javascript code for the Scratch block, the Python code for interaction with the API, and the dissected GAN and its associated API. You will need the following repositories in order to interact with those components and actually use the Scratch GAN Paint Extension: 
-[https://github.com/mit-quest/k12scratch-blocks](https://github.com/mit-quest/k12scratch-blocks)
-[https://github.com/mit-quest/k12scratch-gui](https://github.com/mit-quest/k12scratch-gui)
-[https://github.com/mit-quest/k12scratch-vm](https://github.com/mit-quest/k12scratch-vm)
-[https://github.com/mit-quest/k12scratch-render](https://github.com/mit-quest/k12scratch-render)
-[https://github.com/mit-quest/bridge_gandissect](https://github.com/mit-quest/bridge_gandissect)
+*[https://github.com/mit-quest/k12scratch-blocks](https://github.com/mit-quest/k12scratch-blocks)
+*[https://github.com/mit-quest/k12scratch-gui](https://github.com/mit-quest/k12scratch-gui)
+*[https://github.com/mit-quest/k12scratch-vm](https://github.com/mit-quest/k12scratch-vm)
+*[https://github.com/mit-quest/k12scratch-render](https://github.com/mit-quest/k12scratch-render)
+*[https://github.com/mit-quest/bridge_gandissect](https://github.com/mit-quest/bridge_gandissect)
 
 The Javascript code for the Scratch block is located primarily in the following two documents:
-[https://github.com/mit-quest/k12scratch-blocks/blob/master/core/field_ganpaint.js](https://github.com/mit-quest/k12scratch-blocks/blob/master/core/field_ganpaint.js)
-[https://github.com/mit-quest/k12scratch-vm/blob/master/src/extensions/scratch3_ganpaint/index.js](https://github.com/mit-quest/k12scratch-vm/blob/master/src/extensions/scratch3_ganpaint/index.js)
+*[https://github.com/mit-quest/k12scratch-blocks/blob/master/core/field_ganpaint.js](https://github.com/mit-quest/k12scratch-blocks/blob/master/core/field_ganpaint.js)
+*[https://github.com/mit-quest/k12scratch-vm/blob/master/src/extensions/scratch3_ganpaint/index.js](https://github.com/mit-quest/k12scratch-vm/blob/master/src/extensions/scratch3_ganpaint/index.js)
 
 The Python code for interaction with the API is in this document:
-[https://github.com/mit-quest/k12scratch-blocks/blob/master/core/GANpaint_request.py](https://github.com/mit-quest/k12scratch-blocks/blob/master/core/GANpaint_request.py)
+*[https://github.com/mit-quest/k12scratch-blocks/blob/master/core/GANpaint_request.py](https://github.com/mit-quest/k12scratch-blocks/blob/master/core/GANpaint_request.py)
 
 And the dissected GAN and its associated API is in this repository:
-[https://github.com/mayigrin/proGAN_translation](https://github.com/mayigrin/proGAN_translation)
+*[https://github.com/mayigrin/proGAN_translation](https://github.com/mayigrin/proGAN_translation)
 
 The way these components all work together is as follows:
 * The user sets up the Scratch Dev environment and runs the GUI
