@@ -12,7 +12,10 @@
 ## Introduction
 Hi, I'm Maya, the student who was working on this project during spring & fall 2019. The project is effectively to take [GAN Paint](http://gandissect.res.ibm.com/ganpaint.html?project=churchoutdoor&layer=layer4) and put it in a Scratch block. I'm proud to say that I helped start the project, and also worked on getting it to a point where it's viable. There is still lots of room for improvement, which I will discuss later in this document. I will also explain the different components that allow this extension to work and how they work together, as well as how to interact with the GANPaint API. If you have any questions, feel free to contact me at my Kerberos email (mayigrin at mit dot-edu). I'd be happy to help! 
 
-If you are going to work on the GAN Paint extension, please go through all sections of this document. 
+If you are going to work on the GAN Paint extension, please go through all sections of this document.
+
+Also, you'll notice that I mention Phillip quite a bit throughout this document. He was the student to work on this project during spring 2019. You can see his documentation at the following link:
+[https://github.com/PTegmark/Scratch-GANPaint/blob/master/README.md](https://github.com/PTegmark/Scratch-GANPaint/blob/master/README.md)
 
 
 ## What is GAN Paint? 
