@@ -103,9 +103,9 @@ All of these additions can be found in either [https://github.com/mit-quest/k12s
 
 ### What the Block/Extension currently does: 
 
-* The block displays a dropdown GUI for the GAN Paint editor. This dropdown field is of the type "ganpaint", a new field type that I created for this project. 
+* The block displays a dropdown GUI for the GAN Paint editor. This dropdown field is of the type "ganpaint", a new field type that Phillip created for this project. 
 
-* The dropdown GUI has: 11 buttons with text on its left hand side (I will inventively refer to these buttons as "text buttons"), the main image that is being edited in the middle, and 16 buttons on the right hand side for selecting which starting church image to use (I will creatively refer to these buttons as "church selection buttons"). 
+* The dropdown GUI has: 11 buttons with text on its left hand side (We refer to these buttons as "text buttons"), the main image that is being edited in the middle, and 16 buttons on the right hand side for selecting which starting church image to use (We refer to these buttons as "church selection buttons"). 
 
 * The first 7 of the text buttons (labeled "tree" through "dome") are used to select which brush you are using. They act as a set of radio buttons (so that only 1 of the 7 can be selected at any given time). A string called "brushState" records which of the 7 brush buttons is currently selected (see scratch-blocks/core/field_ganpaint.js). 
 
@@ -143,7 +143,7 @@ All of these additions can be found in either [https://github.com/mit-quest/k12s
 
 This needs to be fixed. You will need the GAN Paint extension to function properly in Firefox, Chrome, Safari, and Microsoft Edge (and possibly also in Internet Explorer and Opera--ask whoever is in charge (presumably your supervisor) about what browsers the GAN Paint extension needs to function properly in). Right now, the SVG images in question do display properly in Firefox though, I can guarantee that much. 
 
-I have not tested the GAN Paint extension in Firefox, Microsoft Edge, Internet Explorer, or Opera, so I don't know how well the extension currently works in those browsers. 
+We have not tested the GAN Paint extension in Microsoft Edge, Internet Explorer, or Opera, so we don't know how well the extension currently works in those browsers. 
 
 * On the [GAN Paint website](http://gandissect.res.ibm.com/ganpaint.html?project=churchoutdoor&layer=layer4), the main image gets visibly shaded as the user drags their mouse over it. Currently, however, the ganpaint field in Scratch does not do so. So, if you have time, this shading feature should be implemented in the ganpaint field. To accomplish this, you will probably need to add code to the functions "Blockly.FieldGANPaint.prototype.onMouseDown" and "Blockly.FieldGANPaint.prototype.onMouseMove" in the file "scratch-blocks/core/field-ganpaint.js". 
 
