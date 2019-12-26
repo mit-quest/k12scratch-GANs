@@ -4,7 +4,7 @@
 ## Contents
 * Introduction
 * What is GAN Paint? 
-* How the GAN Paint Extension Works
+* How the GAN Paint Extension works
 * The current state of the GAN Paint block
 * Other notes
 
@@ -19,8 +19,8 @@ If you are going to work on the GAN Paint extension, please go through all secti
 [GAN Paint](http://gandissect.res.ibm.com/ganpaint.html?project=churchoutdoor&layer=layer4) is a tool that has used GANs (Generative Adversarial Networks) to generate 16 photorealistic images of churches. By using the various brushes provided, and then dragging your mouse across the image, you can tell GAN Paint to add or remove certain features to/from different parts of the image, and GAN Paint will alter the image accordingly. I recommend that you play around with GAN Paint for a few minutes to see what I'm talking about. 
 
 
-## How the GAN Paint Extension Works 
-###Overview
+## How the GAN Paint Extension works 
+### Overview
 The GAN Paint Extension is made up of 3 major components: the Javascript code for the Scratch block, the Python code for interaction with the API, and the dissected GAN and its associated API. You will need the following repositories in order to interact with those components and actually use the Scratch GAN Paint Extension: 
 [https://github.com/mit-quest/k12scratch-blocks](https://github.com/mit-quest/k12scratch-blocks)
 [https://github.com/mit-quest/k12scratch-gui](https://github.com/mit-quest/k12scratch-gui)
@@ -49,7 +49,7 @@ The way these components all work together is as follows:
 
 I will now explain, for each of those steps, what code needs to be run and where in order to accomplish that task.
 
-### Initial Downloads and Installations
+### Initial downloads and installations
 First make sure to install Git and npm (Node Package Manager) on your computer, and then download my versions of the scratch-gui, scratch-vm, scratch-blocks, scratch-render, and gandissect repositories from GitHub. Make sure to save all 4 repositories in the same folder. Said repositories can be found here: 
 
 * scratch-gui: [https://github.com/mit-quest/k12scratch-blocks](https://github.com/mit-quest/k12scratch-blocks)
@@ -69,7 +69,7 @@ First, in "k12scratch-blocks/blob/master/core/field_ganpaint.js", go to line 797
 
 Next, in "k12scratch-blocks/blob/master/core/GANpaint_request.py", go to lines 25, 32, 57, and 101. In each of those places, replace "34.74.168.113" with the IP address you found for k12scratch-blocks, or "localhost" if you're running everything locally.
 
-### How to set up the Scratch Dev Environment
+### How to set up the Scratch Dev environment
 Now, to run the modified version of Scratch, open the terminal, cd into the k12scratch-gui directory, and enter the command "npm start -- --no-inline --no-hot".
 
 If the "npm start -- --no-inline --no-hot" command isn't working, see if [this tutorial](https://scratch.mit.edu/discuss/topic/336496/) can help you. 
@@ -101,7 +101,7 @@ I also added code (both on the Javascript and Python side) to convert the inform
 All of these additions can be found in either [https://github.com/mit-quest/k12scratch-blocks/blob/master/core/field_ganpaint.js](https://github.com/mit-quest/k12scratch-blocks/blob/master/core/field_ganpaint.js) or [https://github.com/mit-quest/k12scratch-blocks/blob/master/core/GANpaint_request.py](https://github.com/mit-quest/k12scratch-blocks/blob/master/core/GANpaint_request.py)
 
 
-### What The Block/Extension Currently Does: 
+### What the Block/Extension currently does: 
 
 * The block displays a dropdown GUI for the GAN Paint editor. This dropdown field is of the type "ganpaint", a new field type that I created for this project. 
 
@@ -125,7 +125,7 @@ All of these additions can be found in either [https://github.com/mit-quest/k12s
 
 * When any given church selection button is clicked, the main image will be set to display the corresponding image. 
 
-### What The Block/Extension Still Needs To Do: 
+### What the Block/Extension still needs to do: 
 
 * The 10th text button (labeled "undo"), can be clicked, but currently doesn't do anything besides print the message "Undo button clicked. " to the console. It needs to be properly implemented as an undo button. This undo button will ideally function by storing previous versions of the main image on the user's web browser, and accessing them as necessary when the undo button is clicked. Of course, the actual implementation of the undo button will be up to you (assuming that you are the one who will finish this project). Insert the code that you write for the undo button within the function "Blockly.FieldGANPaint.prototype.onButtonClick" in the file "scratch-blocks/core/field_ganpaint.js", at the spot that says: 
 
