@@ -99,18 +99,24 @@ Once you've run Gandissect on your GAN, you can run `python -m netdissect.server
 
 ### GET /all_projects
 *Takes in:* no parameters.
+
 *Returns:* a list of jsons, one for each project you've dissected with Gandisect. In each json, there's two attributes: "project", which is the name of this JSON's project; and "info", which is a json containing the attribute "layers" which corresponds to a list of the layers available in this dissection.
+
 I used this command to access the names of the layers I could use.
 
 ### GET /rankings
 *Takes in:* `project`, which is the name of the project you want to use; and `layer`, the name of the layer you want to use.
+
 *Returns:* a json containing different metrics from the dissection. Each metric has a list of scores, and the index of each score is the unit its associated with. You can therefore use this use to figure out the most highly-ranked units for each feature.
+
 You can see what a response looks like if you try using the UI with one of the projects & layers you saw in the previous request.
 I used the "iou" metric for the feature I was interested in, and then found the 10 lowest-ranking units, since all of the scores were negated.
 
 ### GET /levels
 *Takes in:* `project`, which is the name of the project you want to use; `layer`, the name of the layer you want to use; and `quantiles`, the quantile for the ablation values it will return.
+
 *Returns:* a json containing ablation values for each unit, given the quantile you inputted. Again, the index of each value corresponds to the unit associated with it.
+
 I used this to find the ablation values for the 10 highest-ranked units that I found using the previous request.
 
 ### POST /generate
@@ -142,7 +148,7 @@ I used this to find the ablation values for the 10 highest-ranked units that I f
       "return_urls": 0,
     }
 ```
-Where `<image_id>` is the image we're modifying; `<base64png_string>` is a base64png string that represents a 256x256 image with white in non-selected areas and #0BC6D4 in selected areas (essentially, the area of selected pixels we want to apply our feature of choice to); `<project>` is the name of the project you've dissected and want to use,
+Where `<image_id>` is the image we're modifying; `<base64png_string>` is a base64png string that represents a 256x256 image with white in non-selected areas and #0BC6D4 in selected areas (essentially, the area of selected pixels we want to apply our feature of choice to); `<project>` is the name of the project you've dissected and want to use; 
 and `<abalations>` refers to a list of dictionaries in the following format:
 ```
 {
@@ -154,7 +160,9 @@ and `<abalations>` refers to a list of dictionaries in the following format:
 ```
 Where `<layer>` is the layer we've been using in all of our requests; `<unit>` the index of one of the 10 highest-ranked units that we found earlier;
 and `<level>` is the ablation value for that unit that we found using the `/levels` requests.
+
 *Returns:* a json containing within it a base64png string that represents the image result we want.
+
 This is the request that will actually generate the modified image that we want from this API.
 
 
