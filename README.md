@@ -5,6 +5,7 @@
 * Introduction
 * What is GAN Paint? 
 * How the GAN Paint Extension works
+* How to interact with GAN Paint/Gandissect API
 * The current state of the GAN Paint block
 * Other notes
 
@@ -12,7 +13,7 @@
 ## Introduction
 Hi, I'm Maya, the student who was working on this project during spring & fall 2019. The project is effectively to take [GAN Paint](http://gandissect.res.ibm.com/ganpaint.html?project=churchoutdoor&layer=layer4) and put it in a Scratch block. I'm proud to say that I helped start the project, and also worked on getting it to a point where it's viable. There is still lots of room for improvement, which I will discuss later in this document. I will also explain the different components that allow this extension to work and how they work together, as well as how to interact with the GANPaint API. If you have any questions, feel free to contact me at my Kerberos email (mayigrin at mit dot-edu). I'd be happy to help! 
 
-If you are going to work on the GAN Paint extension, please go through all sections of this document.
+If you are going to work on the GAN Paint extension, please go through all sections of this document. If you're just curious about how to use the Gandissect API, read only "How to interact with GAN Paint/Gandissect API".
 
 Also, you'll notice that I mention Phillip quite a bit throughout this document. He was the student to work on this project during spring 2019. You can see his documentation at the following link:
 [https://github.com/PTegmark/Scratch-GANPaint/blob/master/README.md](https://github.com/PTegmark/Scratch-GANPaint/blob/master/README.md)
@@ -89,6 +90,75 @@ Open another terminal window, cd into the k12scratch-blocks directory, and then 
 
 ### How to access the GUI
 Once everything finishes compiling, go to "http://localhost:8601/" in your web browser (or instead of "localhost", the IP address of k12scratch-gui), and you should see the modified version of Scratch. From there, to load the GAN Paint extension, click on the "Add Extension" button in the bottom left corner of the Scratch GUI, scroll down to the extension labeled "GAN Paint", and click on it. 
+
+
+## How to interact with GAN Paint/Gandissect API
+I created the GAN Paint API used in this project by training a GAN on pictures of castles from the [Places dataset](http://places2.csail.mit.edu/), and then running [Gandissect](https://github.com/CSAILVision/gandissect) on it. If you'd like to learn more about how to train a GAN, you can look at the Github repo I used: [https://github.com/nashory/pggan-pytorch](https://github.com/nashory/pggan-pytorch). If you'd like to learn more about how to dissect a GAN using Gandissect, go here: [https://github.com/CSAILVision/gandissect](https://github.com/CSAILVision/gandissect).
+
+Once you've run Gandissect on your GAN, you can run `python -m netdissect.server --address 0.0.0.0` to start the API. You can then go to [http://localhost:5001/api/ui](http://localhost:5001/api/ui) to see the API UI. If you click on "all", you'll see a list of possible GET and POST requests you can make to the API. Since the UI has very little documentation, I'll give a brief walkthrough of the requests I used, and what you need to use them. 
+
+### GET /all_projects
+*Takes in:* no parameters.
+*Returns:* a list of jsons, one for each project you've dissected with Gandisect. In each json, there's two attributes: "project", which is the name of this JSON's project; and "info", which is a json containing the attribute "layers" which corresponds to a list of the layers available in this dissection.
+I used this command to access the names of the layers I could use.
+
+### GET /rankings
+*Takes in:* `project`, which is the name of the project you want to use; and `layer`, the name of the layer you want to use.
+*Returns:* a json containing different metrics from the dissection. Each metric has a list of scores, and the index of each score is the unit its associated with. You can therefore use this use to figure out the most highly-ranked units for each feature.
+You can see what a response looks like if you try using the UI with one of the projects & layers you saw in the previous request.
+I used the "iou" metric for the feature I was interested in, and then found the 10 lowest-ranking units, since all of the scores were negated.
+
+### GET /levels
+*Takes in:* `project`, which is the name of the project you want to use; `layer`, the name of the layer you want to use; and `quantiles`, the quantile for the ablation values it will return.
+*Returns:* a json containing ablation values for each unit, given the quantile you inputted. Again, the index of each value corresponds to the unit associated with it.
+I used this to find the ablation values for the 10 highest-ranked units that I found using the previous request.
+
+### POST /generate
+*Takes in:* a json of the following format:
+```
+{
+            
+      # image ids we're interested in
+      "ids": [
+        <image_id>
+      ],
+              
+      "interventions": [
+        {
+          # abalations describe which units and values to use to 
+          # change that area
+          "ablations": <abalations>,
+          
+          # maskalpha describes the path that the user selected
+          # to change
+          "mask": {
+            "bitbounds": [],
+            "bitstring": <base64png_string>,
+            "shape": []
+          },
+        }
+      ],
+      "project": <project>,
+      "return_urls": 0,
+    }
+```
+Where `<image_id>` is the image we're modifying; `<base64png_string>` is a base64png string that represents a 256x256 image with white in non-selected areas and #0BC6D4 in selected areas (essentially, the area of selected pixels we want to apply our feature of choice to); `<project>` is the name of the project you've dissected and want to use,
+and `<abalations>` refers to a list of dictionaries in the following format:
+```
+{
+	"alpha": 1, 
+	"layer": <layer>, 
+	"unit": <unit>, 
+	"value": <level>
+}
+```
+Where `<layer>` is the layer we've been using in all of our requests; `<unit>` the index of one of the 10 highest-ranked units that we found earlier;
+and `<level>` is the ablation value for that unit that we found using the `/levels` requests.
+*Returns:* a json containing within it a base64png string that represents the image result we want.
+This is the request that will actually generate the modified image that we want from this API.
+
+
+You can also look at my code [here](https://github.com/mit-quest/k12scratch-blocks/blob/master/core/GANpaint_request.py) to see how I used the above requests to get the result I needed for the GAN Paint extension.
 
 
 ## The current state of the GAN Paint Extension
