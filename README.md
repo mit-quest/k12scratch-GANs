@@ -15,7 +15,7 @@ Hi, I'm Maya, the student who was working on this project during spring & fall 2
 
 If you are going to work on the GAN Paint extension, please go through all sections of this document. If you're just curious about how to use the Gandissect API, read only "How to interact with GAN Paint/Gandissect API".
 
-Also, you'll notice that I mention Phillip quite a bit throughout this document. He was the student to work on this project during spring 2019. You can see his documentation at the following link:
+Also, you'll notice that I mention Phillip quite a bit throughout this document. He was the student to work on this project during summer 2019. You can see his documentation at the following link:
 [https://github.com/PTegmark/Scratch-GANPaint/blob/master/README.md](https://github.com/PTegmark/Scratch-GANPaint/blob/master/README.md)
 
 
