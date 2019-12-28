@@ -20,7 +20,7 @@ Also, you'll notice that I mention Phillip quite a bit throughout this document.
 
 
 ## What is GAN Paint? 
-[GAN Paint](http://gandissect.res.ibm.com/ganpaint.html?project=churchoutdoor&layer=layer4) is a tool that has used GANs (Generative Adversarial Networks) to generate 16 photorealistic images of churches. By using the various brushes provided, and then dragging your mouse across the image, you can tell GAN Paint to add or remove certain features to/from different parts of the image, and GAN Paint will alter the image accordingly. I recommend that you play around with GAN Paint for a few minutes to see what I'm talking about. 
+[GAN Paint](http://gandissect.res.ibm.com/ganpaint.html?project=churchoutdoor&layer=layer4) is a tool that has used GANs (Generative Adversarial Networks) to generate 16 photorealistic images of churches. By using the various brushes provided, and then dragging your mouse across the image, you can tell GAN Paint to add or remove certain features to/from different parts of the image, and GAN Paint will alter the image accordingly. Feel free to play around with GAN Paint for a few minutes to see it for yourself. 
 
 
 ## How the GAN Paint Extension works 
